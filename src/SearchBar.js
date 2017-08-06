@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class SearchBar extends Component {
 
@@ -11,6 +12,16 @@ class SearchBar extends Component {
 
   componentDidMount() {
     this.searchBarInput.focus();
+  }
+
+  componentWillReceiveProps(nextProps, nextState){
+
+    let search = nextProps.location.search.replace('?q=', '')
+
+    if (search !== this.state.queryText){
+          this.props.onSubmit(search);
+          this.setState({queryText: search})
+    }
   }
 
   handleQueryTextInputChange(e) {
@@ -34,7 +45,7 @@ class SearchBar extends Component {
           className="search-bar" 
           type="text" 
           placeholder="Search..." 
-          value={this.queryText}
+          value={this.state.queryText}
           onChange={this.handleQueryTextInputChange.bind(this)}
         />
       </form>
@@ -42,4 +53,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

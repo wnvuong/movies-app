@@ -29,6 +29,7 @@ class App extends Component {
     console.log('update')
   }
 
+  
   handleQueryTextInput(queryText) {
     // this.setState({
     //   queryText: queryText
@@ -66,7 +67,7 @@ class App extends Component {
       <Router>
         <div>
           <Route path="/" render={(router) => <div>
-            {console.log(router.location)}
+            
             <SearchBar 
               onQueryTextInput={this.handleQueryTextInput.bind(this)}
               onSubmit={this.handleSubmit.bind(this, router)}
